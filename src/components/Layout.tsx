@@ -1,26 +1,38 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import { styled } from '@mui/system';
 import Sidebar from './Sidebar';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { updateState } from "../redux/slice/app.slice.js";
 
 interface LayoutProps {
     children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
+    const darkMode = useAppSelector((state) => state.app.darkMode);
+    const dispatch = useAppDispatch();
+    const darkModeToggled = useAppSelector((state) => state.app.darkModeToggled);
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
     const theme = React.useMemo(
         () =>
             createTheme({
                 palette: {
-                    mode: !prefersDarkMode ? 'dark' : 'light',
+                    mode: darkMode ? 'dark' : 'light',
                 },
             }),
-        [prefersDarkMode],
+        [darkMode],
     );
+
+    useEffect(() => {
+        if (!darkModeToggled) {
+            dispatch(updateState({ darkMode: prefersDarkMode }))
+        }
+    }, [prefersDarkMode])
+
 
     return (
         <ThemeProvider theme={theme}>

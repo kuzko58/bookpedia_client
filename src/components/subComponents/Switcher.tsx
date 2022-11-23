@@ -4,14 +4,13 @@ import Switch, { SwitchProps } from '@mui/material/Switch';
 import { SxProps } from '@mui/system';
 
 interface SwitcherProps {
-    sx: SxProps
+    sx: SxProps;
+    checked: boolean;
 }
 
-export const Switcher: React.FC<SwitcherProps> = () => {
+export const Switcher: React.FC<SwitcherProps> = (props) => {
     return (
-        <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} sx={{
-            marginLeft: 'auto'
-        }} />
+        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} sx={props.sx} checked={props.checked} />
     )
 }
 
