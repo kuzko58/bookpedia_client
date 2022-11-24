@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import books from '../../data/books.json';
 
 const initialState = {
     darkMode: false,
     darkModeToggled: false,
-    gridMode: true
+    gridMode: true,
+    books
 };
 
 export const appSlice = createSlice({

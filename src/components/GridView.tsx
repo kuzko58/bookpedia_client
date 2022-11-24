@@ -5,9 +5,11 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import BookCard from './subComponents/BookCard';
-import books from '../data/books.json';
+import { useAppSelector } from '../redux/hooks';
 
 const GridView = () => {
+    const books = useAppSelector((state) => state.app.books);
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid

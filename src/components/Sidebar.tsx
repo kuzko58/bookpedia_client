@@ -12,6 +12,7 @@ import Switcher from './subComponents/Switcher';
 
 const Sidebar = () => {
     const darkMode = useAppSelector((state) => state.app.darkMode);
+    const books = useAppSelector((state) => state.app.books);
     const dispatch = useAppDispatch();
 
     const toggleDarkMode = () => {
@@ -32,7 +33,7 @@ const Sidebar = () => {
                         <SidebarRowContentText>My Books</SidebarRowContentText>
                     </>
                     <Chip
-                        label="15"
+                        label={books?.length}
                         sx={{
                             marginLeft: 'auto'
                         }}
