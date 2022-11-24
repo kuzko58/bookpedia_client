@@ -47,7 +47,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 </LayoutSide>
                 <LayoutMain>
                     <Navbar />
-                    {props.children}
+                    <>
+                    {props.children}</>
                 </LayoutMain>
             </LayoutWrapper>
         </ThemeProvider>
@@ -75,5 +76,6 @@ const LayoutMain = styled('div')(({ theme }) => ({
     height: '100%',
     width: '100%',
     padding: theme.spacing(3),
-    border: '1px solid red'
+    display: 'flex',
+    flexDirection: 'column',
 }));

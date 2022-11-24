@@ -10,9 +10,7 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from '../redux/slice/app.slice.js';
 import Switcher from './subComponents/Switcher';
 
-interface SidebarProps {}
-
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar = () => {
     const darkMode = useAppSelector((state) => state.app.darkMode);
     const dispatch = useAppDispatch();
 
