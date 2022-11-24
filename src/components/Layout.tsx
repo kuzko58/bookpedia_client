@@ -47,7 +47,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 </LayoutSide>
                 <LayoutMain>
                     <Navbar />
-                    {props.children}
+                    <>
+                    {props.children}</>
                 </LayoutMain>
             </LayoutWrapper>
         </ThemeProvider>
@@ -60,8 +61,7 @@ const LayoutWrapper = styled('div')({
     width: '100vw',
     height: '100%',
     display: 'flex',
-    overflow: 'hidden',
-    border: '1px solid'
+    overflow: 'hidden'
 });
 
 const LayoutSide = styled('div')({
@@ -75,5 +75,6 @@ const LayoutMain = styled('div')(({ theme }) => ({
     height: '100%',
     width: '100%',
     padding: theme.spacing(3),
-    border: '1px solid red'
+    display: 'flex',
+    flexDirection: 'column',
 }));

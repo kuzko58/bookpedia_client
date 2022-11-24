@@ -10,10 +10,9 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from '../redux/slice/app.slice.js';
 import Switcher from './subComponents/Switcher';
 
-interface SidebarProps {}
-
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar = () => {
     const darkMode = useAppSelector((state) => state.app.darkMode);
+    const books = useAppSelector((state) => state.app.books);
     const dispatch = useAppDispatch();
 
     const toggleDarkMode = () => {
@@ -34,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
                         <SidebarRowContentText>My Books</SidebarRowContentText>
                     </>
                     <Chip
-                        label="15"
+                        label={books?.length}
                         sx={{
                             marginLeft: 'auto'
                         }}
@@ -87,7 +86,8 @@ const SidebarWrapper = styled('div')(({ theme }) => ({
     backgroundColor:
         theme.palette.mode === 'dark'
             ? 'rgba(255, 255, 255, 0.08)'
-            : 'transparent'
+            : 'transparent',
+    borderRight: `1px solid ${theme.palette.divider}`
 }));
 
 const SidebarRow = styled('div')(({ theme }) => ({
