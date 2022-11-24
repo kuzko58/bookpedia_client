@@ -1,12 +1,14 @@
 import React, { ReactNode, useEffect } from 'react';
+
+import { styled } from '@mui/system';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
-import { styled } from '@mui/system';
+
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { updateState } from '../redux/slice/app.slice.js';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { updateState } from "../redux/slice/app.slice.js";
 
 interface LayoutProps {
     children: ReactNode;
@@ -15,25 +17,26 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = (props) => {
     const darkMode = useAppSelector((state) => state.app.darkMode);
     const dispatch = useAppDispatch();
-    const darkModeToggled = useAppSelector((state) => state.app.darkModeToggled);
+    const darkModeToggled = useAppSelector(
+        (state) => state.app.darkModeToggled
+    );
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
     const theme = React.useMemo(
         () =>
             createTheme({
                 palette: {
-                    mode: darkMode ? 'dark' : 'light',
-                },
+                    mode: darkMode ? 'dark' : 'light'
+                }
             }),
-        [darkMode],
+        [darkMode]
     );
 
     useEffect(() => {
         if (!darkModeToggled) {
-            dispatch(updateState({ darkMode: prefersDarkMode }))
+            dispatch(updateState({ darkMode: prefersDarkMode }));
         }
-    }, [prefersDarkMode])
-
+    }, [prefersDarkMode]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -48,9 +51,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 </LayoutMain>
             </LayoutWrapper>
         </ThemeProvider>
-
-    )
-}
+    );
+};
 
 export default Layout;
 
@@ -66,7 +68,7 @@ const LayoutSide = styled('div')({
     height: '100%',
     width: '30%',
     minWidth: '200px',
-    maxWidth: '350px',
+    maxWidth: '350px'
 });
 
 const LayoutMain = styled('div')(({ theme }) => ({
