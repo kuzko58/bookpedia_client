@@ -5,7 +5,8 @@ const initialState = {
     darkMode: false,
     darkModeToggled: false,
     gridMode: true,
-    books
+    books,
+    search: '',
 };
 
 export const appSlice = createSlice({

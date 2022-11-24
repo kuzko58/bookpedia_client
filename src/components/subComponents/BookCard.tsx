@@ -2,14 +2,10 @@ import React from 'react';
 
 import { styled } from '@mui/system';
 
+import { BookType } from '../../types/book.type'
+
 interface BookCardProps {
-    book: {
-        title: string;
-        author: string;
-        genre: string;
-        progress: string | number;
-        image: string;
-    };
+    book: BookType;
 }
 
 interface BookCardImageContainerProps {

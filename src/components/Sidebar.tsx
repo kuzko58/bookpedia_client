@@ -86,7 +86,8 @@ const SidebarWrapper = styled('div')(({ theme }) => ({
     backgroundColor:
         theme.palette.mode === 'dark'
             ? 'rgba(255, 255, 255, 0.08)'
-            : 'transparent'
+            : 'transparent',
+    borderRight: `1px solid ${theme.palette.divider}`
 }));
 
 const SidebarRow = styled('div')(({ theme }) => ({
