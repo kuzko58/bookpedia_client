@@ -1,7 +1,6 @@
 import React from 'react';
-import { styled } from '@mui/system';
-import Switch, { SwitchProps } from '@mui/material/Switch';
-import { SxProps } from '@mui/system';
+import { styled, SxProps } from '@mui/system';
+import Switch from '@mui/material/Switch';
 
 interface SwitcherProps {
     sx: SxProps;
@@ -10,12 +9,15 @@ interface SwitcherProps {
 
 export const Switcher: React.FC<SwitcherProps> = (props) => {
     return (
-        <AntSwitch inputProps={{ 'aria-label': 'ant design' }} sx={props.sx} checked={props.checked} />
-    )
-}
+        <AntSwitch
+            inputProps={{ 'aria-label': 'ant design' }}
+            sx={props.sx}
+            checked={props.checked}
+        />
+    );
+};
 
-export default Switcher
-
+export default Switcher;
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
@@ -24,11 +26,11 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     display: 'flex',
     '&:active': {
         '& .MuiSwitch-thumb': {
-            width: 15,
+            width: 15
         },
         '& .MuiSwitch-switchBase.Mui-checked': {
-            transform: 'translateX(9px)',
-        },
+            transform: 'translateX(9px)'
+        }
     },
     '& .MuiSwitch-switchBase': {
         padding: 2,
@@ -37,21 +39,23 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
             color: '#fff',
             '& + .MuiSwitch-track': {
                 opacity: 1,
-                backgroundColor: '#121212',
-            },
-        },
+                backgroundColor: '#121212'
+            }
+        }
     },
     '& .MuiSwitch-thumb': {
         boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
         width: 12,
         height: 12,
-        borderRadius: 6,
+        borderRadius: 6
     },
     '& .MuiSwitch-track': {
         borderRadius: 16 / 2,
         opacity: 1,
         backgroundColor:
-            theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
-        boxSizing: 'border-box',
-    },
+            theme.palette.mode === 'dark'
+                ? 'rgba(255,255,255,.35)'
+                : 'rgba(0,0,0,.25)',
+        boxSizing: 'border-box'
+    }
 }));
