@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from '../redux/slice/app.slice.js';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import CustomModal from './CustomModal';
 
 interface LayoutProps {
     children: ReactNode;
@@ -47,9 +48,9 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 </LayoutSide>
                 <LayoutMain>
                     <Navbar />
-                    <>
-                    {props.children}</>
+                    <>{props.children}</>
                 </LayoutMain>
+                <CustomModal />
             </LayoutWrapper>
         </ThemeProvider>
     );
@@ -76,5 +77,5 @@ const LayoutMain = styled('div')(({ theme }) => ({
     width: '100%',
     padding: theme.spacing(3),
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
 }));

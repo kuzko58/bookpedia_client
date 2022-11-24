@@ -2,3 +2,8 @@
   height: 100%;
   max-width: 1280px;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}

@@ -1,12 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import books from '../../data/books.json';
+import { BookType } from '../../types/book.type';
 
-const initialState = {
+interface StateType {
+    darkMode: boolean;
+    darkModeToggled: boolean;
+    gridMode: boolean;
+    books: BookType[];
+    search: string;
+    modalOpen: boolean;
+    currentBook: BookType | null
+}
+
+const initialState: StateType = {
     darkMode: false,
     darkModeToggled: false,
     gridMode: true,
     books,
     search: '',
+    modalOpen: false,
+    currentBook: null,
 };
 
 export const appSlice = createSlice({
