@@ -2,7 +2,9 @@ import React from 'react';
 
 import { styled } from '@mui/system';
 
-import { BookType } from '../../types/book.type'
+import { useAppDispatch } from '../../redux/hooks';
+import { updateState } from '../../redux/slice/app.slice.js';
+import { BookType } from '../../types/book.type';
 
 interface BookCardProps {
     book: BookType;
@@ -13,8 +15,14 @@ interface BookCardImageContainerProps {
 }
 
 const BookCard: React.FC<BookCardProps> = (props) => {
+    const dispatch = useAppDispatch();
+
+    const handleCardClick = () => {
+        dispatch(updateState({ currentBook: props.book, modalOpen: true }));
+    };
+
     return (
-        <BookCardWrapper>
+        <BookCardWrapper onClick={handleCardClick}>
             <BookCardImageContainer background={props.book.image}>
                 <BookCardProgressBadge>
                     {props.book.progress}%
@@ -30,7 +38,8 @@ const BookCard: React.FC<BookCardProps> = (props) => {
 export default BookCard;
 
 const BookCardWrapper = styled('div')(() => ({
-    width: '100%'
+    width: '100%',
+    cursor: 'pointer'
 }));
 
 const BookCardImageContainer = styled('div')<BookCardImageContainerProps>(
