@@ -4,6 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import { styled } from '@mui/system';
 import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from "../redux/slice/app.slice.js";
 
@@ -42,6 +43,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
                     <Sidebar />
                 </LayoutSide>
                 <LayoutMain>
+                    <Navbar />
                     {props.children}
                 </LayoutMain>
             </LayoutWrapper>
@@ -64,10 +66,12 @@ const LayoutSide = styled('div')({
     height: '100%',
     width: '30%',
     minWidth: '200px',
-    maxWidth: '300px',
+    maxWidth: '350px',
 });
 
-const LayoutMain = styled('div')({
+const LayoutMain = styled('div')(({ theme }) => ({
     height: '100%',
-    width: '70%'
-});
+    width: '100%',
+    padding: theme.spacing(3),
+    border: '1px solid red'
+}));

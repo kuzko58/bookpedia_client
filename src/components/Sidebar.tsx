@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
 import { styled } from '@mui/system';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -77,7 +76,8 @@ const SidebarRow = styled('div')(({ theme }) => ({
 const SidebarRowTitle = styled('p')(({ theme }) => ({
     width: '100%',
     marginBottom: theme.spacing(2),
-    fontWeight: 600
+    fontWeight: 600,
+    color: theme.palette.text.secondary
 }));
 
 const SidebarRowContent = styled('div')(({ theme }) => ({
@@ -90,16 +90,16 @@ const SidebarRowContent = styled('div')(({ theme }) => ({
     cursor: 'pointer',
 
     '&.is_selected': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#121212' : 'rgba(0, 0, 0, 0.48)',
+        backgroundColor: theme.palette.mode === 'dark' ? '#121212' : 'rgba(0, 0, 0, 0.18)',
     },
 
     '&.is_not_selected': {
         '&:hover': {
-            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.20)' : 'rgba(0, 0, 0, 0.18)'
+            backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.20)' : 'rgba(0, 0, 0, 0.08)'
         }
     }
 }));
 
-const SidebarRowContentText = styled('p')(({ theme }) => ({
-
+const SidebarRowContentText = styled('p')(() => ({
+    fontSize: '16px',
 }));
