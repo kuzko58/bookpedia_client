@@ -57,9 +57,9 @@ const Navbar = () => {
             <>
                 {showSearch ? (
                     <ClickAwayListener onClickAway={() => setShowSearch(false)}>
-                        <div>
+                        <SearchInputBox>
                             <SearchInput />
-                        </div>
+                        </SearchInputBox>
                     </ClickAwayListener>
                 ) : (
                     <NavIconWrapper
@@ -87,7 +87,7 @@ const NavbarWrapper = styled('div')(({ theme }) => ({
     borderBottom: `1px solid ${theme.palette.divider}`
 }));
 
-const NavbarTitle = styled('h2')(({ theme }) => ({
+const NavbarTitle = styled('h2')(() => ({
     fontSize: '1.8rem',
     margin: 0
 }));
@@ -112,4 +112,10 @@ const NavIconWrapper = styled(IconButton)(({ theme }) => ({
     '&:hover': {
         backgroundColor: 'rgba(185, 185, 185, 0.3)'
     }
+}));
+
+const SearchInputBox = styled('div')(({ theme }) => ({
+    maxWidth: '400px',
+    width: '100%',
+    marginLeft: '10px'
 }));
