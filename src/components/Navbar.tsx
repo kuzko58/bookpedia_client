@@ -81,10 +81,10 @@ export default Navbar;
 
 const NavbarWrapper = styled('div')(({ theme }) => ({
     width: '100%',
-    height: '60px',
+    height: '70px',
     display: 'flex',
     alignItems: 'center',
-    borderBottom: `1px solid ${theme.palette.divider}`
+    borderBottom: `1px solid ${theme.palette.divider}`,
 }));
 
 const NavbarTitle = styled('h2')(() => ({
