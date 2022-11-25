@@ -4,5 +4,7 @@ export interface BookType {
     genre: string;
     progress: string | number;
     image: string;
-    description: string
+    description: string,
+    updatedAt?: Date | string;
+    createdAt?: Date | string;
 }

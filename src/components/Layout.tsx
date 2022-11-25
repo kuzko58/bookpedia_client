@@ -47,8 +47,10 @@ const Layout: React.FC<LayoutProps> = (props) => {
                     <Sidebar />
                 </LayoutSide>
                 <LayoutMain>
-                    <Navbar />
-                    <>{props.children}</>
+                    <LayoutMainNav>
+                        <Navbar />
+                    </LayoutMainNav>
+                    <LayoutMainBody>{props.children}</LayoutMainBody>
                 </LayoutMain>
                 <CustomModal />
             </LayoutWrapper>
@@ -72,10 +74,47 @@ const LayoutSide = styled('div')({
     maxWidth: '350px'
 });
 
+const LayoutMainNav = styled('div')(({ theme }) => ({
+    width: '100%',
+    padding: theme.spacing(3, 3, 0)
+}));
+
 const LayoutMain = styled('div')(({ theme }) => ({
     height: '100%',
     width: '100%',
-    padding: theme.spacing(3),
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+
+    '& ::-webkit-scrollbar': {
+        width: '6px'
+    },
+
+    '& ::-webkit-scrollbar-track': {
+        background:
+            theme.palette.mode === 'dark'
+                ? 'rgba(175, 175, 175, 0.1)'
+                : 'rgba(0, 0, 0, 0.1)'
+    },
+
+    '& ::-webkit-scrollbar-thumb': {
+        background:
+            theme.palette.mode === 'dark'
+                ? 'rgba(175, 175, 175, 0.2)'
+                : 'rgba(0, 0, 0, 0.2)',
+        borderRadius: '3px'
+    },
+
+    '& ::-webkit-scrollbar-thumb:hover': {
+        background:
+            theme.palette.mode === 'dark'
+                ? 'rgba(175, 175, 175, 0.4)'
+                : 'rgba(0, 0, 0, 0.4)'
+    }
+}));
+
+const LayoutMainBody = styled('div')(({ theme }) => ({
+    height: '100%',
+    width: '100%',
+    overflowY: 'auto',
+    overflowX: 'hidden'
 }));

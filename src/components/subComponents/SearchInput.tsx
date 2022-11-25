@@ -43,6 +43,7 @@ const SearchInput = () => {
                 <SearchIcon />
             </SearchIconsWrapper>
             <CustomSearch
+                autoFocus
                 placeholder="Search for Keywords..."
                 value={value}
                 onChange={handleInput}
