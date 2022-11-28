@@ -5,6 +5,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Chip from '@mui/material/Chip';
+import Typography from '@mui/material/Typography';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from '../redux/slice/app.slice.js';
@@ -95,7 +96,7 @@ const SidebarRow = styled('div')(({ theme }) => ({
     padding: theme.spacing(2)
 }));
 
-const SidebarRowTitle = styled('p')(({ theme }) => ({
+const SidebarRowTitle = styled(Typography)(({ theme }) => ({
     width: '100%',
     marginBottom: theme.spacing(2),
     fontWeight: 600,
@@ -126,6 +127,6 @@ const SidebarRowContent = styled('div')(({ theme }) => ({
     }
 }));
 
-const SidebarRowContentText = styled('p')(() => ({
-    fontSize: '16px'
+const SidebarRowContentText = styled(Typography)(({ theme }) => ({
+    padding: theme.spacing(2, 1)
 }));

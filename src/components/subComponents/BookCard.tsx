@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { styled } from '@mui/system';
+import Typography from '@mui/material/Typography';
 
 import { useAppDispatch } from '../../redux/hooks';
 import { updateState } from '../../redux/slice/app.slice.js';
@@ -37,9 +38,12 @@ const BookCard: React.FC<BookCardProps> = (props) => {
 
 export default BookCard;
 
-const BookCardWrapper = styled('div')(() => ({
+const BookCardWrapper = styled('div')(({ theme }) => ({
     width: '100%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    [theme.breakpoints.down('xs')]: {
+        marginBottom: '10px'
+    }
 }));
 
 const BookCardImageContainer = styled('div')<BookCardImageContainerProps>(
@@ -56,7 +60,7 @@ const BookCardImageContainer = styled('div')<BookCardImageContainerProps>(
     })
 );
 
-const BookCardProgressBadge = styled('div')(({ theme }) => ({
+const BookCardProgressBadge = styled(Typography)(({ theme }) => ({
     position: 'absolute',
     top: 10,
     left: 10,
@@ -66,7 +70,7 @@ const BookCardProgressBadge = styled('div')(({ theme }) => ({
     color: '#fff'
 }));
 
-const BookCardGenreBadge = styled('div')(({ theme }) => ({
+const BookCardGenreBadge = styled(Typography)(({ theme }) => ({
     position: 'absolute',
     bottom: 10,
     right: 10,
@@ -76,9 +80,10 @@ const BookCardGenreBadge = styled('div')(({ theme }) => ({
     color: '#fff'
 }));
 
-const BookCardTitle = styled('h3')(({ theme }) => ({
+const BookCardTitle = styled(Typography)(({ theme }) => ({
     padding: theme.spacing(4, 0, 0),
     margin: 0,
+    fontWeight: 600,
     width: '100%',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -86,7 +91,7 @@ const BookCardTitle = styled('h3')(({ theme }) => ({
     textTransform: 'capitalize'
 }));
 
-const BookCardAuthor = styled('p')(({ theme }) => ({
+const BookCardAuthor = styled(Typography)(({ theme }) => ({
     width: '100%',
     margin: 0,
     color: theme.palette.text.secondary,

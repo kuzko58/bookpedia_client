@@ -17,10 +17,9 @@ const GridView = () => {
             <Grid
                 container
                 spacing={{ xs: 2, md: 2, lg: 3 }}
-                // columns={{ xs: 4, sm: 8, md: 12 }}
             >
                 {books?.filter(( (book) => filterSearch(book, search))).map((book, index) => (
-                    <Grid xs={12} sm={6} md={4} lg={2} key={index}>
+                    <Grid xxs={12} xs={6} sm={4} md={4} lg={3} xl={2} key={index}>
                         <BookCard book={book} />
                     </Grid>
                 ))}
