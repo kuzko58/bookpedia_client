@@ -7,6 +7,7 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import SearchIcon from '@mui/icons-material/Search';
 import { IconButton } from '@mui/material';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
+import Typography from '@mui/material/Typography';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from '../redux/slice/app.slice.js';
@@ -27,52 +28,59 @@ const Navbar = () => {
 
     return (
         <NavbarWrapper>
-            <NavbarTitle>Book Library</NavbarTitle>
-            <NavIconWrapper className="more">
-                <MoreHorizIcon
-                    fontSize="medium"
-                    sx={{
-                        color: 'green'
-                    }}
-                />
-            </NavIconWrapper>
-            <NavIconWrapper
-                className={gridMode ? 'is_selected' : ''}
-                sx={{
-                    marginLeft: 'auto'
-                }}
-                onClick={setGridView}
-            >
-                <GridViewIcon />
-            </NavIconWrapper>
-            <NavIconWrapper
-                className={!gridMode ? 'is_selected' : ''}
-                sx={{
-                    marginLeft: '5px'
-                }}
-                onClick={setListView}
-            >
-                <TableRowsIcon />
-            </NavIconWrapper>
-            <>
-                {showSearch ? (
-                    <ClickAwayListener onClickAway={() => setShowSearch(false)}>
-                        <SearchInputBox>
-                            <SearchInput />
-                        </SearchInputBox>
-                    </ClickAwayListener>
-                ) : (
-                    <NavIconWrapper
-                        className="is_selected"
+            <NavbarMain>
+                <NavbarTitle variant="h4">Book Library</NavbarTitle>
+                <NavIconWrapper className="more">
+                    <MoreHorizIcon
+                        fontSize="medium"
                         sx={{
-                            marginLeft: '10px'
+                            color: 'green'
                         }}
-                        onClick={() => setShowSearch(true)}
-                    >
-                        <SearchIcon fontSize="medium" />
-                    </NavIconWrapper>
-                )}
-            </>
+                    />
+                </NavIconWrapper>
+                <NavIconWrapper
+                    className={gridMode ? 'is_selected' : ''}
+                    sx={{
+                        marginLeft: 'auto'
+                    }}
+                    onClick={setGridView}
+                >
+                    <GridViewIcon />
+                </NavIconWrapper>
+                <NavIconWrapper
+                    className={!gridMode ? 'is_selected' : ''}
+                    sx={{
+                        marginLeft: '5px'
+                    }}
+                    onClick={setListView}
+                >
+                    <TableRowsIcon />
+                </NavIconWrapper>
+                <>
+                    {showSearch ? (
+                        <ClickAwayListener
+                            onClickAway={() => setShowSearch(false)}
+                        >
+                            <SearchInputBox className="large">
+                                <SearchInput />
+                            </SearchInputBox>
+                        </ClickAwayListener>
+                    ) : (
+                        <NavIconWrapper
+                            className="is_selected search_icon"
+                            sx={{
+                                marginLeft: '10px'
+                            }}
+                            onClick={() => setShowSearch(true)}
+                        >
+                            <SearchIcon fontSize="medium" />
+                        </NavIconWrapper>
+                    )}
+                </>
+            </NavbarMain>
+            <SearchInputBox className="small">
+                <SearchInput />
+            </SearchInputBox>
         </NavbarWrapper>
     );
 };
@@ -80,16 +88,20 @@ const Navbar = () => {
 export default Navbar;
 
 const NavbarWrapper = styled('div')(({ theme }) => ({
+    width: '100%'
+}));
+
+const NavbarMain = styled('div')(({ theme }) => ({
     width: '100%',
     height: '70px',
     display: 'flex',
     alignItems: 'center',
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`
 }));
 
-const NavbarTitle = styled('h2')(() => ({
-    fontSize: '1.8rem',
-    margin: 0
+const NavbarTitle = styled(Typography)(() => ({
+    margin: 0,
+    whiteSpace: 'nowrap'
 }));
 
 const NavIconWrapper = styled(IconButton)(({ theme }) => ({
@@ -111,11 +123,30 @@ const NavIconWrapper = styled(IconButton)(({ theme }) => ({
 
     '&:hover': {
         backgroundColor: 'rgba(185, 185, 185, 0.3)'
+    },
+
+    '&.search_icon': {
+        [theme.breakpoints.down('md')]: {
+            display: 'none'
+        }
     }
 }));
 
 const SearchInputBox = styled('div')(({ theme }) => ({
-    maxWidth: '400px',
     width: '100%',
-    marginLeft: '10px'
+    '&.small': {
+        display: 'block',
+        margin: theme.spacing(2, 0, 1),
+        [theme.breakpoints.up('md')]: {
+            display: 'none'
+        }
+    },
+    '&.large': {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'block',
+            maxWidth: '400px',
+            marginLeft: '10px'
+        }
+    }
 }));

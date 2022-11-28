@@ -28,6 +28,7 @@ const CustomModal = () => {
                 }}
             >
                 <HighlightOffIcon
+                    fontSize="large"
                     sx={{
                         color: 'lightgray',
                         cursor: 'pointer',
@@ -35,15 +36,21 @@ const CustomModal = () => {
                     }}
                     onClick={closeModal}
                 />
-                <CustomModalImage background={currentBook?.image || ''} />
-                <BookTitle>{currentBook?.title}</BookTitle>
-                <BookAuthor>{currentBook?.author}</BookAuthor>
-                <BookDescription>{currentBook?.description}</BookDescription>
+                <ModalMainContent>
+                    <CustomModalImage background={currentBook?.image || ''} />
+                    <BookTitle variant="h4">{currentBook?.title}</BookTitle>
+                    <BookAuthor>{currentBook?.author}</BookAuthor>
+                    <BookDescription>
+                        {currentBook?.description}
+                    </BookDescription>
+                </ModalMainContent>
                 <CallToActionRow>
                     <SecondaryButton onClick={closeModal}>
-                        Close
+                        <Typography>Close</Typography>
                     </SecondaryButton>
-                    <PrimaryButton>Continue Reading</PrimaryButton>
+                    <PrimaryButton>
+                        <Typography>Continue Reading</Typography>
+                    </PrimaryButton>
                 </CallToActionRow>
             </CustomModalBox>
         </Modal>
@@ -57,17 +64,25 @@ const CustomModalBox = styled(Box)(({ theme }) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '100%',
-    height: '80%',
+    width: '90%',
     minHeight: '300px',
-    maxHeight: '800px',
-    maxWidth: '700px',
+    maxWidth: '640px',
     minWidth: '320px',
     padding: theme.spacing(3),
     borderRadius: '40px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    border: 'none',
+    outline: 'none'
+}));
+
+const ModalMainContent = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    overflowY: 'auto',
+    marginBottom: '20px'
 }));
 
 const CustomModalImage = styled('div')<CustomModalImageProps>(
@@ -82,7 +97,7 @@ const CustomModalImage = styled('div')<CustomModalImageProps>(
     })
 );
 
-const BookTitle = styled('h3')(({ theme }) => ({
+const BookTitle = styled(Typography)(({ theme }) => ({
     padding: theme.spacing(4, 0, 0),
     margin: 0,
     marginTop: '20px',
@@ -95,7 +110,7 @@ const BookTitle = styled('h3')(({ theme }) => ({
     fontSize: '1.8rem'
 }));
 
-const BookAuthor = styled('p')(({ theme }) => ({
+const BookAuthor = styled(Typography)(({ theme }) => ({
     width: '100%',
     margin: 0,
     marginTop: '5px',
@@ -115,8 +130,9 @@ const BookDescription = styled(Typography)(({ theme }) => ({
     textOverflow: 'ellipsis',
     wordWrap: 'break-word',
     overflow: 'hidden',
-    maxHeight: '12.6rem',
-    lineHeight: '1.4rem'
+    maxHeight: '14.4rem',
+    lineHeight: '1.6rem',
+    overflowY: 'auto'
 }));
 
 const CallToActionRow = styled('div')(({ theme }) => ({
@@ -124,7 +140,7 @@ const CallToActionRow = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '20px'
+    marginTop: 'auto'
 }));
 
 const PrimaryButton = styled('button')(({ theme }) => ({
@@ -144,5 +160,5 @@ const SecondaryButton = styled('button')(({ theme }) => ({
     borderRadius: '10px',
     backgroundColor: 'rgba(175, 175, 175, 0.1)',
     fontSize: '1.04rem',
-    color: 'darkslategray'
+    color: theme.palette.text.secondary
 }));

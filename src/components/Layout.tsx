@@ -1,10 +1,13 @@
 import React, { ReactNode, useEffect } from 'react';
 
 import { styled } from '@mui/system';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {
+    ThemeProvider,
+    createTheme,
+    responsiveFontSizes
+} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
-
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { updateState } from '../redux/slice/app.slice.js';
 import Sidebar from './Sidebar';
@@ -15,6 +18,17 @@ interface LayoutProps {
     children: ReactNode;
 }
 
+declare module '@mui/material/styles' {
+    interface BreakpointOverrides {
+        xxs: true;
+        xs: true;
+        sm: true;
+        md: true;
+        lg: true;
+        xl: true;
+    }
+}
+
 const Layout: React.FC<LayoutProps> = (props) => {
     const darkMode = useAppSelector((state) => state.app.darkMode);
     const dispatch = useAppDispatch();
@@ -23,14 +37,34 @@ const Layout: React.FC<LayoutProps> = (props) => {
     );
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
+    const fontMd = useMediaQuery('(max-width:800px)');
+
+    const getFontSize = () => {
+        if (fontMd) return 20;
+        return 16;
+    };
+
     const theme = React.useMemo(
         () =>
             createTheme({
                 palette: {
                     mode: darkMode ? 'dark' : 'light'
+                },
+                breakpoints: {
+                    values: {
+                        xxs: 0,
+                        xs: 360,
+                        sm: 600,
+                        md: 900,
+                        lg: 1200,
+                        xl: 1536
+                    }
+                },
+                typography: {
+                    htmlFontSize: getFontSize()
                 }
             }),
-        [darkMode]
+        [darkMode, fontMd]
     );
 
     useEffect(() => {
@@ -40,7 +74,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
     }, [prefersDarkMode]);
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={responsiveFontSizes(theme)}>
             <CssBaseline />
             <LayoutWrapper>
                 <LayoutSide>
@@ -60,19 +94,22 @@ const Layout: React.FC<LayoutProps> = (props) => {
 
 export default Layout;
 
-const LayoutWrapper = styled('div')({
+const LayoutWrapper = styled('div')(({ theme }) => ({
     width: '100vw',
     height: '100%',
     display: 'flex',
     overflow: 'hidden'
-});
+}));
 
-const LayoutSide = styled('div')({
+const LayoutSide = styled('div')(({ theme }) => ({
     height: '100%',
-    width: '30%',
+    width: '40%',
     minWidth: '200px',
-    maxWidth: '350px'
-});
+    maxWidth: '350px',
+    [theme.breakpoints.down('md')]: {
+        display: 'none'
+    }
+}));
 
 const LayoutMainNav = styled('div')(({ theme }) => ({
     width: '100%',
