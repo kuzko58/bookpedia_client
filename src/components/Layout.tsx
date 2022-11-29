@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
 
 import { styled } from '@mui/system';
 import {
@@ -13,6 +14,7 @@ import { updateState } from '../redux/slice/app.slice.js';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import CustomModal from './CustomModal';
+import { GET_BOOKS_COLLECTION } from '../graphql/query';
 
 interface LayoutProps {
     children: ReactNode;
@@ -30,6 +32,7 @@ declare module '@mui/material/styles' {
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
+    const [getBooksCollection] = useLazyQuery(GET_BOOKS_COLLECTION);
     const darkMode = useAppSelector((state) => state.app.darkMode);
     const dispatch = useAppDispatch();
     const darkModeToggled = useAppSelector(
@@ -67,11 +70,29 @@ const Layout: React.FC<LayoutProps> = (props) => {
         [darkMode, fontMd]
     );
 
+    const loadBooksCollection = async () => {
+        try {
+            const data = await getBooksCollection();
+
+            if (data && data.data) {
+                dispatch(
+                    updateState({ books: data.data.getAllBooksCollections })
+                );
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         if (!darkModeToggled) {
             dispatch(updateState({ darkMode: prefersDarkMode }));
         }
     }, [prefersDarkMode]);
+
+    useEffect(() => {
+        loadBooksCollection();
+    }, []);
 
     return (
         <ThemeProvider theme={responsiveFontSizes(theme)}>
